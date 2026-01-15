@@ -27,9 +27,9 @@ classifiers = [
 dependencies = [ "pygame" ]
 
 [project.urls]
-Documentation = "https://github.com/fmorton/robot-xbox-joystick#readme"
-Issues = "https://github.com/fmorton/robot-xbox-joystick/issues"
-Source = "https://github.com/fmorton/robot-xbox-joystick"
+Documentation = "https://github.com/fmorton/robot-python-xbox-joystick#readme"
+Issues = "https://github.com/fmorton/robot-python-xbox-joystick/issues"
+Source = "https://github.com/fmorton/robot-python-xbox-joystick"
 
 [project.optional-dependencies]
 test = [
