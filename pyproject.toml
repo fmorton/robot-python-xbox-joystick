@@ -1,0 +1,78 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "robot-xbox-joystick"
+version = "0.0.1"
+description = "Library for basic xbox joystick controllers."
+readme = "README.rst"
+requires-python = ">=3.9"
+license = "LGPL-3.0-only"
+keywords = []
+authors = [
+  { name = "Frank Morton", email = "fmorton@mac.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [ "pygame" ]
+
+[project.urls]
+Documentation = "https://github.com/fmorton/robot-xbox-joystick#readme"
+Issues = "https://github.com/fmorton/robot-xbox-joystick/issues"
+Source = "https://github.com/fmorton/robot-xbox-joystick"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.3",
+    "pytest-cov",
+		"pytest-mock",
+		"flake8-pyproject",
+]
+dev = [
+	"pylint",
+	"pytest",
+	"pytest-mock",
+	"black",
+	"flake8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/robot"]
+
+[tool.black]
+line-length = 132
+target-version = ["py37"]
+skip-string-normalization = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.pylint.messages_control]
+disable = [
+	"line-too-long",
+	"missing-class-docstring",
+	"missing-function-docstring",
+	"missing-module-docstring",
+	"redefined-builtin",
+	"too-few-public-methods",
+	"too-many-arguments",
+	"too-many-positional-arguments"
+]
+
+[tool.flake8]
+max-line-length = 132
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv"
+]
