@@ -68,10 +68,10 @@ Xbox Joystick Example
 
 .. code-block:: python
 
-	import pygame
-	import pytest
+    import pygame
+    import pytest
 
-	from robot.xbox_joystick import XboxJoystick
+    from robot.xbox_joystick import XboxJoystick
 
     joystick = XboxJoystick().connect()
 
