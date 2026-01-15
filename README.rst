@@ -46,11 +46,9 @@ Overview
 
 .. end-badges
 
-Rewritten Python Library for Birdbrain Technologies Hummingbird Bit and Finch 2
+Library for basic xbox joystick controllers.
 
-Rewrite inspired by https://github.com/BirdBrainTechnologies/BirdBrain-Python-Library
-
-* Free software: GNU Lesser General Public License v3 (LGPLv3)
+* Free software: MIT License
 
 Installation
 ============
@@ -65,94 +63,41 @@ You can also install the in-development version with::
 
 
 
-Hummingbird Example
-===================
+Xbox Joystick Example
+=====================
 
 .. code-block:: python
 
-  from robot.hummingbird import Hummingbird
-  from time import sleep
+import pygame
+import pytest
 
-  hummingbird = Hummingbird('A')
+from robot.xbox_joystick import XboxJoystick
 
-  for i in range(0, 10):
-    hummingbird.led(1, 100)
-    sleep(0.1)
+def test_xbox_joystick():
+    joystick = XboxJoystick().connect()
 
-    hummingbird.led(1, 0)
-    sleep(0.1)
+    print("Joystick connected")
 
-    hummingbird.stop_all()
+    running = True
 
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.JOYBUTTONDOWN:
+                print(f"Button {event.button} pressed on joystick {event.joy}")
 
+                if event.button == 2:  # 'X' button to quit
+                    running = False
+            elif event.type == pygame.JOYAXISMOTION:
+                print(f"Joystick axis {event.axis} value {event.value}")
 
-Finch Example
-===================
-
-.. code-block:: python
-
-  from robot.finch import Finch
-  from time import sleep
-
-  finch = Finch('A')
-
-  for i in range(0, 10):
-    finch.beak(100, 100, 100)
-    sleep(0.1)
-
-    finch.beak(0, 0, 0)
-    sleep(0.1)
-
-  finch.stop_all()
-
-
-
-Tasks Example (requires the robot-tasks package)
-================================================
-
-.. code-block:: python
-
-  from robot.hummingbird import Hummingbird
-  from robot.tasks import Tasks
-
-  async def task_1(bird):
-    while True:
-      print("task_1 running")
-
-      await Tasks.yield_task(1.0)
-
-
-  async def task_2(bird):
-    while True:
-      print("task_2 running")
-
-      await Tasks.yield_task(0.5)
-
-
-  bird = Hummingbird("A")
-
-  tasks = Tasks()
-
-  tasks.create_task(task_1(bird))
-  tasks.create_task(task_2(bird))
-
-  tasks.run()
-
-
-
-Original Documentation
-=============================================
-
-The original documentation from Birdbrain Technolgies can be found at:
-
-Finch: https://learn.birdbraintechnologies.com/finch/python/library/
-
-Hummingbird: https://learn.birdbraintechnologies.com/hummingbirdbit/python/library/
+    assert True
 
 
 Testing
 =======
 
-To run all the tests run (hummingbird (with micro:bit v2) on 'A' and finch on 'B')::
+To run all the tests run::
 
-    pytest
+    pytest -s
