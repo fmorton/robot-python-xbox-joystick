@@ -20,4 +20,3 @@ while running:
                 running = False
         elif event.type == pygame.JOYAXISMOTION:
             print(f"Joystick axis {event.axis} value {event.value}")
-

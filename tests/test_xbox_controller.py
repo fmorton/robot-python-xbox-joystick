@@ -3,6 +3,7 @@ import pytest
 
 from robot.xbox_joystick import XboxJoystick
 
+
 def test_xbox_joystick():
     joystick = XboxJoystick().connect()
 
@@ -24,3 +25,32 @@ def test_xbox_joystick():
 
     assert True
 
+
+def wheel_speed_calculation(x_axis, y_axis, left_speed_target, right_speed_target, max_speed=1.0):
+    left_speed, right_speed = XboxJoystick.wheel_speeds(x_axis, y_axis, max_speed)
+
+    assert left_speed == left_speed_target
+    assert right_speed == right_speed_target
+
+
+def test_wheel_speeds():
+    wheel_speed_calculation(0.0, -1.0, 1.0, 1.0)  #  forward
+    wheel_speed_calculation(0.0, -0.5, 0.5, 0.5)  #  forward slow
+
+    wheel_speed_calculation(0.0, 1.0, -1.0, -1.0)  #  backwards
+    wheel_speed_calculation(0.0, 0.5, -0.5, -0.5)  #  backwards slow
+
+    wheel_speed_calculation(-1.0, 0.0, -1.0, 1.0)  #  left
+    wheel_speed_calculation(-0.5, 0.0, -0.5, 0.5)  #  left slow
+
+    wheel_speed_calculation(1.0, 0.0, 1.0, -1.0)  #  right
+    wheel_speed_calculation(0.5, 0.0, 0.5, -0.5)  #  right slow
+
+    wheel_speed_calculation(0.0, -1.0, 1.0, 1.0)  #  forward
+    wheel_speed_calculation(0.0, -0.5, 0.5, 0.5)  #  forward slow
+
+    wheel_speed_calculation(1.0, -1.0, 1.0, 0.0)  #  right 45 degrees
+    wheel_speed_calculation(0.5, -0.5, 1.0, 0.0)  #  right 45 degrees slow
+
+    wheel_speed_calculation(0.0, -1.0, 100.0, 100.0, 100.0)  #  forward (100 scale)
+    wheel_speed_calculation(0.0, -0.5, 50.0, 50.0, 100.0)  #  forward slow (100 scale)

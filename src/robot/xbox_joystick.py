@@ -1,3 +1,4 @@
+import math
 import os
 import pygame
 import time
@@ -33,3 +34,27 @@ class XboxJoystick:
                 print(wait_for_joystick_message)
 
                 time.sleep(1.0)
+
+    @classmethod
+    def wheel_speeds(cls, x_axis, y_axis, max_speed=1.0):
+        """
+        Converts joystick axes to differential wheel speeds.
+        y_axis: forward/backward (-1 to 1)
+        x_axis: left/right (-1 to 1)
+        """
+        # Simple mapping:
+        # Forward: Y is negative, so invert it
+        # Turn: X is positive to the right
+
+        speed = -y_axis
+        turn = x_axis
+
+        # Calculate speeds
+        left_speed = speed + turn
+        right_speed = speed - turn
+
+        # Normalize/Clamp values to -1.0 to 1.0
+        left_speed = max(-1.0, min(1.0, left_speed)) * max_speed
+        right_speed = max(-1.0, min(1.0, right_speed)) * max_speed
+
+        return round(left_speed, 2), round(right_speed, 2)
