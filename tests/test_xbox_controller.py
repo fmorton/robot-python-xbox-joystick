@@ -54,3 +54,9 @@ def test_wheel_speeds():
 
     wheel_speed_calculation(0.0, -1.0, 100.0, 100.0, 100.0)  #  forward (100 scale)
     wheel_speed_calculation(0.0, -0.5, 50.0, 50.0, 100.0)  #  forward slow (100 scale)
+
+
+def test_wheel_speed_and_angle():
+    speed, angle = XboxJoystick.wheel_speed_and_angle(0.0, -1.0)
+    assert speed == 1.0
+    assert angle == 90.0

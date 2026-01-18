@@ -58,3 +58,24 @@ class XboxJoystick:
         right_speed = max(-1.0, min(1.0, right_speed)) * max_speed
 
         return round(left_speed, 2), round(right_speed, 2)
+
+    @classmethod
+    def wheel_speed_and_angle(cls, x_axis, y_axis, max_speed=1.0):
+        if abs(x_axis) < 0.25:
+            x_axis = 0.0
+        if abs(y_axis) < 0.25:
+            y_axis = 0.0
+
+        speed = math.sqrt(x_axis**2 + y_axis**2)
+
+        if speed > 1.0:
+            speed = 1.0
+
+        angle_rad = math.atan2(-y_axis, x_axis)
+        angle_deg = math.degrees(angle_rad)
+
+        # if angle_deg < 0:
+        #    angle_deg += 360
+
+        print("Axis:", x_axis, y_axis, "  speed:", speed, "  angle", angle_deg)
+        return round(speed, 2), round(angle_deg, 2)
