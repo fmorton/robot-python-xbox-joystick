@@ -35,6 +35,9 @@ class XboxJoystick:
 
                 time.sleep(1.0)
 
+    def run(self):
+        pass
+
     @classmethod
     def wheel_speeds(cls, x_axis, y_axis, max_speed=1.0):
         """

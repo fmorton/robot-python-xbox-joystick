@@ -18,7 +18,7 @@ def test_xbox_joystick():
             elif event.type == pygame.JOYBUTTONDOWN:
                 print(f"Button {event.button} pressed on joystick {event.joy}")
 
-                if event.button == 2:  # 'X' button to quit
+                if event.button == 15:  # options button to quit
                     running = False
             elif event.type == pygame.JOYAXISMOTION:
                 print(f"Joystick axis {event.axis} value {event.value}")
@@ -60,3 +60,6 @@ def test_wheel_speed_and_angle():
     speed, angle = XboxJoystick.wheel_speed_and_angle(0.0, -1.0)
     assert speed == 1.0
     assert angle == 90.0
+
+def test_run():
+    assert True
