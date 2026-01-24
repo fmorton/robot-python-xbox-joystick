@@ -3,6 +3,7 @@ import os
 import pygame
 import time
 
+from robot.xbox_state import XboxState
 
 class XboxJoystick:
     def __init__(self):
@@ -10,6 +11,7 @@ class XboxJoystick:
         self.joystick = None
         self.joystick_name = None
         self.device_index = None
+        self.state = XboxState()
 
         os.environ["SDL_VIDEODRIVER"] = "dummy"
 
@@ -28,6 +30,7 @@ class XboxJoystick:
         if wait_for_joystick_message:
             while True:
                 for event in pygame.event.get():
+                print("DEBUG: startup event",event)
                     if event.type == pygame.JOYDEVICEADDED:
                         return self._connect_event(event)
 
@@ -36,7 +39,19 @@ class XboxJoystick:
                 time.sleep(1.0)
 
     def run(self):
-        pass
+        running = True
+        debugging = True
+
+        while running:
+            for event in pygame.event.get():
+                print("Event:", event)
+                if event.type in QUEUED_EVENTS:
+                    if event.type == pygame.QUIT:
+                        running = False
+                    elif event.type == pygame.JOYBUTTONDOWN:
+                        if debugging:
+                            print("Button Pressed:", event.button)
+
 
     @classmethod
     def wheel_speeds(cls, x_axis, y_axis, max_speed=1.0):
