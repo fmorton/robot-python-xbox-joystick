@@ -29,9 +29,7 @@ class XboxJoystick:
     def connect(self, wait_for_joystick_message="Waiting for Xbox Controller"):
         if wait_for_joystick_message:
             while True:
-                print("DEBUG: get an event")
                 for event in pygame.event.get():
-                    print("DEBUG: startup event",event)
                     if event.type == pygame.JOYDEVICEADDED:
                         return self._connect_event(event)
 
@@ -39,20 +37,25 @@ class XboxJoystick:
 
                 time.sleep(1.0)
 
-    def run(self):
+    def quit_event(self, event):
+        if event.type == pygame.QUIT:
+            return True
+
+        if event.type == pygame.JOYBUTTONDOWN:
+            if event.button == 15:
+                return True
+
+        return False
+
+    def run(self, debugging = False):
         running = True
-        debugging = True
 
         while running:
             for event in pygame.event.get():
-                print("Event:", event)
-                if event.type in QUEUED_EVENTS:
-                    if event.type == pygame.QUIT:
-                        running = False
-                    elif event.type == pygame.JOYBUTTONDOWN:
-                        if debugging:
-                            print("Button Pressed:", event.button)
-
+                if self.quit_event(event):
+                    running = False
+                else:
+                    self.state.event(event, debugging)
 
     @classmethod
     def wheel_speeds(cls, x_axis, y_axis, max_speed=1.0):
@@ -96,5 +99,5 @@ class XboxJoystick:
         # if angle_deg < 0:
         #    angle_deg += 360
 
-        print("Axis:", x_axis, y_axis, "  speed:", speed, "  angle", angle_deg)
+        #print("Axis:", x_axis, y_axis, "  speed:", speed, "  angle", angle_deg)
         return round(speed, 2), round(angle_deg, 2)

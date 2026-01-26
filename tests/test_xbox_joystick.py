@@ -3,18 +3,16 @@ import pytest
 
 from robot.xbox_joystick import XboxJoystick
 
-
 joystick = XboxJoystick().connect()
 
 def test_xbox_joystick():
-
     print("Joystick connected")
 
     running = True
 
     while running:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if joystick.quit_event(event):
                 running = False
             elif event.type == pygame.JOYBUTTONDOWN:
                 print(f"Button {event.button} pressed on joystick {event.joy}")
@@ -62,6 +60,12 @@ def test_wheel_speed_and_angle():
     assert speed == 1.0
     assert angle == 90.0
 
-def test_run():
-    print("DEBUG....test_run!!!!!!!!!!!!!!!!!!!!!!!!!")
-    assert True
+def test_state():  # this code is the same as joystick.run()
+        running = True
+
+        while running:
+            for event in pygame.event.get():
+                if joystick.quit_event(event):
+                    running = False
+                else:
+                    joystick.state.event(event, True)
