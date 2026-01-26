@@ -5,6 +5,7 @@ import time
 
 from robot.xbox_state import XboxState
 
+
 class XboxJoystick:
     def __init__(self):
         self.connected = False
@@ -37,7 +38,8 @@ class XboxJoystick:
 
                 time.sleep(1.0)
 
-    def quit_event(self, event):
+    @classmethod
+    def quit_event(cls, event):
         if event.type == pygame.QUIT:
             return True
 
@@ -47,7 +49,7 @@ class XboxJoystick:
 
         return False
 
-    def run(self, debugging = False):
+    def run(self, debugging=False):
         running = True
 
         while running:
@@ -99,5 +101,5 @@ class XboxJoystick:
         # if angle_deg < 0:
         #    angle_deg += 360
 
-        #print("Axis:", x_axis, y_axis, "  speed:", speed, "  angle", angle_deg)
+        # print("Axis:", x_axis, y_axis, "  speed:", speed, "  angle", angle_deg)
         return round(speed, 2), round(angle_deg, 2)
