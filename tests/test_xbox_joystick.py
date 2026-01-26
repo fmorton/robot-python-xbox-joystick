@@ -4,8 +4,9 @@ import pytest
 from robot.xbox_joystick import XboxJoystick
 
 
+joystick = XboxJoystick().connect()
+
 def test_xbox_joystick():
-    joystick = XboxJoystick().connect()
 
     print("Joystick connected")
 
@@ -62,4 +63,5 @@ def test_wheel_speed_and_angle():
     assert angle == 90.0
 
 def test_run():
+    print("DEBUG....test_run!!!!!!!!!!!!!!!!!!!!!!!!!")
     assert True

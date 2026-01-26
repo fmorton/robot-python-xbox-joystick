@@ -29,8 +29,9 @@ class XboxJoystick:
     def connect(self, wait_for_joystick_message="Waiting for Xbox Controller"):
         if wait_for_joystick_message:
             while True:
+                print("DEBUG: get an event")
                 for event in pygame.event.get():
-                print("DEBUG: startup event",event)
+                    print("DEBUG: startup event",event)
                     if event.type == pygame.JOYDEVICEADDED:
                         return self._connect_event(event)
 
