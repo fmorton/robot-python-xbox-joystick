@@ -30,9 +30,6 @@ class XboxState:
         return s
 
     def event(self, event, debugging=False):
-        if debugging:
-            print("State event:", event)
-
         if event.type == pygame.JOYBUTTONUP:
             self.button_down_at[event.button] = 0
         elif event.type == pygame.JOYBUTTONDOWN:
@@ -47,7 +44,8 @@ class XboxState:
         else:
             print("Unprocessed event:", event)
 
-        print(self.state_string())
+        if debugging:
+            print(self.state_string())
 
     def left_x(self):
         return self.axis_value[0]

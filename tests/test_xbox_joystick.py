@@ -70,4 +70,4 @@ def test_state():  # this code is the same as joystick.run()
             if joystick.quit_event(event):
                 running = False
             else:
-                joystick.state.event(event, False)
+                joystick.state.event(event, True)
