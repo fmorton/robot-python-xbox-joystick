@@ -7,6 +7,25 @@ from robot.xbox_state import XboxState
 
 
 class XboxJoystick:
+    EVENT_LOOP_DELAY = 0.05
+    WAITING_LOOP_DELAY = 1.0
+
+    BUTTON_A = 0
+    BUTTON_B = 1
+    BUTTON_X = 2
+    BUTTON_Y = 3
+    BUTTON_VIEW = 4  #  left middle button
+    BUTTON_XBOX = 5  #  center middle button
+    BUTTON_SHARE = 6  # right middle button
+    BUTTON_LEFT_JOYSTICK = 7
+    BUTTON_RIGHT_JOYSTICK = 8
+    BUTTON_LEFT_BUMPER = 9
+    BUTTON_RIGHT_BUMPER = 10
+    BUTTON_FORWARD = 11
+    BUTTON_BACKWARD = 12
+    BUTTON_LEFT = 13
+    BUTTON_RIGHT = 14
+
     def __init__(self):
         self.connected = False
         self.joystick = None
@@ -36,7 +55,7 @@ class XboxJoystick:
 
                 print(wait_for_joystick_message)
 
-                time.sleep(1.0)
+                time.sleep(XboxJoystick.WAITING_LOOP_DELAY)
 
     @classmethod
     def quit_event(cls, event):
@@ -49,15 +68,17 @@ class XboxJoystick:
 
         return False
 
-    def run(self, debugging=False):
+    def run(self, run_method, debugging=False):
         running = True
 
         while running:
             for event in pygame.event.get():
                 if self.quit_event(event):
-                    running = False
+                    return False
                 else:
                     self.state.event(event, debugging)
+
+            running = run_method(self)
 
     @classmethod
     def wheel_speeds(cls, x_axis, y_axis, max_speed=1.0):

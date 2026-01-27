@@ -2,6 +2,7 @@ import pygame
 import pytest
 
 from robot.xbox_joystick import XboxJoystick
+from time import sleep
 
 joystick = XboxJoystick().connect()
 
@@ -71,3 +72,18 @@ def test_state():  # this code is the same as joystick.run()
                 running = False
             else:
                 joystick.state.event(event, True)
+
+
+def runner(joystick):
+    print("runner", joystick.state.state_string())
+
+    sleep(XboxJoystick.EVENT_LOOP_DELAY)
+
+    if joystick.state.button_down_milliseconds(XboxJoystick.BUTTON_XBOX):
+        return False
+
+    return True
+
+
+def test_run():
+    joystick.run(runner)

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "robot-xbox-joystick"
-version = "0.0.5"
+version = "0.0.6"
 description = "Library for basic xbox joystick controllers."
 readme = "README.rst"
 requires-python = ">=3.9"

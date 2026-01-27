@@ -24,13 +24,16 @@ class XboxState:
         s = s + self.show_float_value_string(self.right_y())
         s = s + self.show_int_value_string(self.left_trigger())
         s = s + self.show_int_value_string(self.right_trigger())
-        for button in range(15):
+        for button in range(16):
             down_seconds = self.button_down_seconds(button)
 
             if down_seconds > 0:
                 s += f" button{button:3d} down: {down_seconds:4.2f} seconds"
 
         return s
+
+    def print_state_string(self):
+        print(state_string())
 
     def event(self, event, debugging=False):
         if event.type == pygame.JOYBUTTONUP:
