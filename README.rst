@@ -68,17 +68,17 @@ Xbox Joystick Example
 
 .. code-block:: python
 
-	import pygame
+  import pygame
 
-	from robot.xbox_joystick import XboxJoystick
+  from robot.xbox_joystick import XboxJoystick
 
-	joystick = XboxJoystick().connect()
+  joystick = XboxJoystick().connect()
 
-	print("Joystick connected")
+  print("Joystick connected")
 
-	running = True
+  running = True
 
-	while running:
+  while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -98,11 +98,11 @@ The run() loop maintains the state of the joysticks and all buttons for processi
 
 .. code-block:: python
 
-	from robot.xbox_joystick import XboxJoystick
-	from time import sleep
+  from robot.xbox_joystick import XboxJoystick
+  from time import sleep
 
 
-	def robot(joystick):
+  def robot(joystick):
     print("runner", joystick.state.state_string())
 
     if joystick.state.button_down_milliseconds(XboxJoystick.BUTTON_XBOX):
@@ -113,9 +113,9 @@ The run() loop maintains the state of the joysticks and all buttons for processi
     return True
 
 
-	joystick = XboxJoystick().connect()
+  joystick = XboxJoystick().connect()
 
-	joystick.run(robot)
+  joystick.run(robot)
 
 
 
@@ -123,19 +123,19 @@ The joystick.state has the following methods to retrieve the selections from the
 
 .. code-block:: python
 
-	joystick.state.left_x()        # returns x value of left joystick (-1 means max forward/1 max backward)
-	joystick.state.left_y()        # returns y value of left joystick (-1 means max left/1 max right)
+  joystick.state.left_x()        # returns x value of left joystick (-1 means max forward/1 max backward)
+  joystick.state.left_y()        # returns y value of left joystick (-1 means max left/1 max right)
   joystick.state.left_axis()     # returns left_x, left_y
 
-	joystick.state.right_x()       # returns x value of right joystick (-1 means max forward/1 max backward)
-	joystick.state.right_y()       # returns y value of right joystick (-1 means max left/1 max right)
+  joystick.state.right_x()       # returns x value of right joystick (-1 means max forward/1 max backward)
+  joystick.state.right_y()       # returns y value of right joystick (-1 means max left/1 max right)
   joystick.state.right_axis()    # returns right_x, right_y
 
-	joystick.state.left_trigger()       # returns left trigger value (0 to 1 if fully pressed)
-	joystick.state.right_trigger()      # returns right trigger value (0 to 1 if fully pressed)
+  joystick.state.left_trigger()       # returns left trigger value (0 to 1 if fully pressed)
+  joystick.state.right_trigger()      # returns right trigger value (0 to 1 if fully pressed)
 
-	joystick.state.left_trigger_raw()   # returns left trigger unadjusted value (-1 to 1 if fully pressed)
-	joystick.state.right_trigger_raw()   # returns right trigger unadjusted value (-1 to 1 if fully pressed)
+  joystick.state.left_trigger_raw()   # returns left trigger unadjusted value (-1 to 1 if fully pressed)
+  joystick.state.right_trigger_raw()   # returns right trigger unadjusted value (-1 to 1 if fully pressed)
 
   joystick.state.button_down_seconds(button)       # how many seconds "button" has been pressed
   joystick.state.button_down_milliseconds(button)  # how many milliseconds "button" has been pressed
@@ -146,21 +146,21 @@ The following button constant values are available in XboxJoystick:
 
 .. code-block:: python
 
-	BUTTON_A = 0
-	BUTTON_B = 1
-	BUTTON_X = 2
-	BUTTON_Y = 3
-	BUTTON_VIEW = 4   #  left middle button
-	BUTTON_XBOX = 5   #  center middle button
-	BUTTON_SHARE = 6  # right middle button
-	BUTTON_LEFT_JOYSTICK = 7
-	BUTTON_RIGHT_JOYSTICK = 8
-	BUTTON_LEFT_BUMPER = 9
-	BUTTON_RIGHT_BUMPER = 10
-	BUTTON_FORWARD = 11
-	BUTTON_BACKWARD = 12
-	BUTTON_LEFT = 13
-	BUTTON_RIGHT = 14
+  BUTTON_A = 0
+  BUTTON_B = 1
+  BUTTON_X = 2
+  BUTTON_Y = 3
+  BUTTON_VIEW = 4   #  left middle button
+  BUTTON_XBOX = 5   #  center middle button
+  BUTTON_SHARE = 6  # right middle button
+  BUTTON_LEFT_JOYSTICK = 7
+  BUTTON_RIGHT_JOYSTICK = 8
+  BUTTON_LEFT_BUMPER = 9
+  BUTTON_RIGHT_BUMPER = 10
+  BUTTON_FORWARD = 11
+  BUTTON_BACKWARD = 12
+  BUTTON_LEFT = 13
+  BUTTON_RIGHT = 14
 
 
 
