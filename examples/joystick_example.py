@@ -1,5 +1,4 @@
 import pygame
-import pytest
 
 from robot.xbox_joystick import XboxJoystick
 
@@ -13,10 +12,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == pygame.JOYAXISMOTION:
+            print(f"Joystick axis {event.axis} value {event.value}")
         elif event.type == pygame.JOYBUTTONDOWN:
             print(f"Button {event.button} pressed on joystick {event.joy}")
 
-            if event.button == 2:  # 'X' button to quit
+            if event.button == XboxJoystick.BUTTON_XBOX:
                 running = False
-        elif event.type == pygame.JOYAXISMOTION:
-            print(f"Joystick axis {event.axis} value {event.value}")

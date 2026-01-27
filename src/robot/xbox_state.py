@@ -10,20 +10,18 @@ class XboxState:
         self.button_down_at = [0] * 16
         pass
 
-    def show_float_value_string(self, value):
+    def show_value_string(self, value):
         return "{:6.2f}".format(value)
-
-    def show_int_value_string(self, value):
-        return "{:4d}".format(value)
 
     def state_string(self):
         s = ""
-        s = s + self.show_float_value_string(self.left_x())
-        s = s + self.show_float_value_string(self.left_y())
-        s = s + self.show_float_value_string(self.right_x())
-        s = s + self.show_float_value_string(self.right_y())
-        s = s + self.show_int_value_string(self.left_trigger())
-        s = s + self.show_int_value_string(self.right_trigger())
+        s = s + self.show_value_string(self.left_x())
+        s = s + self.show_value_string(self.left_y())
+        s = s + self.show_value_string(self.right_x())
+        s = s + self.show_value_string(self.right_y())
+        s = s + self.show_value_string(self.left_trigger())
+        s = s + self.show_value_string(self.right_trigger())
+
         for button in range(16):
             down_seconds = self.button_down_seconds(button)
 
@@ -72,7 +70,7 @@ class XboxState:
         return self.right_x(), self.right_y()
 
     def adjusted_trigger_value(self, value):
-        return int(abs((value + 1.0) / 2.0 * 100))
+        return round((value + 1.0) / 2.0, 2)
 
     def left_trigger(self):
         return self.adjusted_trigger_value(self.axis_value[4])
