@@ -75,7 +75,7 @@ def test_state():  # this code is the same as joystick.run()
 
 
 def runner(joystick):
-    print("runner", joystick.state.state_string("extra"))
+    joystick.state.print_state_string("extra")
 
     sleep(XboxJoystick.EVENT_LOOP_DELAY)
 

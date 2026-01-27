@@ -33,7 +33,7 @@ class XboxState:
         return s
 
     def print_state_string(self, extra_string=None):
-        print(state_string(extra_string))
+        print(self.state_string(extra_string))
 
     def event(self, event, debugging=False):
         if event.type == pygame.JOYBUTTONUP:
