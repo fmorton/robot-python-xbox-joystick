@@ -13,7 +13,7 @@ class XboxState:
     def show_value_string(self, value):
         return "{:6.2f}".format(value)
 
-    def state_string(self):
+    def state_string(self, extra_string=None):
         s = ""
         s = s + self.show_value_string(self.left_x())
         s = s + self.show_value_string(self.left_y())
@@ -21,6 +21,8 @@ class XboxState:
         s = s + self.show_value_string(self.right_y())
         s = s + self.show_value_string(self.left_trigger())
         s = s + self.show_value_string(self.right_trigger())
+        if extra_string is not None:
+            s = s + " " + extra_string
 
         for button in range(16):
             down_seconds = self.button_down_seconds(button)
@@ -30,8 +32,8 @@ class XboxState:
 
         return s
 
-    def print_state_string(self):
-        print(state_string())
+    def print_state_string(self, extra_string=None):
+        print(state_string(extra_string))
 
     def event(self, event, debugging=False):
         if event.type == pygame.JOYBUTTONUP:

@@ -3,7 +3,7 @@ from time import sleep
 
 
 def robot(joystick):
-    print("runner", joystick.state.state_string())
+    print("robot", joystick.state.state_string())
 
     if joystick.state.button_down_milliseconds(XboxJoystick.BUTTON_XBOX):
         return False
