@@ -87,3 +87,7 @@ def runner(joystick):
 
 def test_run():
     joystick.run(runner)
+
+
+def test_tick():
+    joystick.tick(30)

@@ -9,6 +9,7 @@ from robot.xbox_state import XboxState
 class XboxJoystick:
     EVENT_LOOP_DELAY = 0.05
     WAITING_LOOP_DELAY = 1.0
+    CLOCK_TICKS = 20
 
     BUTTON_A = 0
     BUTTON_B = 1
@@ -32,6 +33,7 @@ class XboxJoystick:
         self.joystick_name = None
         self.device_index = None
         self.state = XboxState()
+        self.clock = pygame.time.Clock()
 
         os.environ["SDL_VIDEODRIVER"] = "dummy"
 
@@ -79,6 +81,9 @@ class XboxJoystick:
                     self.state.event(event, debugging)
 
             running = run_method(self)
+
+    def tick(self, frame_rate):
+        self.clock.tick(frame_rate)
 
     @classmethod
     def wheel_speeds(cls, x_axis, y_axis, max_speed=1.0):
