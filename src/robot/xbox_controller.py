@@ -6,6 +6,8 @@ import time
 from robot.xbox_state import XboxState
 
 
+
+
 class XboxController:
     EVENT_LOOP_DELAY = 0.05
     WAITING_LOOP_DELAY = 1.0
@@ -38,11 +40,11 @@ class XboxController:
         os.environ["SDL_VIDEODRIVER"] = "dummy"
 
         pygame.init()
-        pygame.controller.init()
+        pygame.joystick.init()
 
     def _connect_event(self, event):
         self.device_index = event.device_index
-        self.controller = pygame.controller.Controller(self.device_index)
+        self.controller = pygame.joystick.Joystick(self.device_index)
         self.controller_name = self.controller.get_name()
         self.connected = True
 

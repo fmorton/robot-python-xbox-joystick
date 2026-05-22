@@ -2,6 +2,7 @@ import pygame
 
 from robot.xbox_controller import XboxController
 
+
 controller = XboxController().connect()
 
 print("Controller connected")
